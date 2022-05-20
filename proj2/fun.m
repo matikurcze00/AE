@@ -8,7 +8,7 @@ function [wartosc] = fun(x)
         wartosc = wartosc+items(i,2)*x(i);
     end
     if waga>W
-        wartosc=wartosc/2+(W-waga)*100;
+        wartosc=wartosc/1.5+(W-waga)*100;
     end
     %wykomentować jeśli nie korzystamy z ga()
     %wartosc=-wartosc;

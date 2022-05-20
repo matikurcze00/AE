@@ -13,10 +13,10 @@ W=0.3*sum(items(:,1));
     
 %parametry algorytmu
 rozmiar_populacji=2000;
-rozmiar_elity=2;
-liczba_iteracji=200;
-praw_mutacji=1/32;
-liczba_pot_krzyz=100;
+rozmiar_elity=1;
+liczba_iteracji=1000;
+praw_mutacji=1/16;
+liczba_pot_krzyz=500;
 liczba_pot_mut=1000;
 
 %inicjalizacja populacji
@@ -31,7 +31,7 @@ populacja=[populacja, wartosc_f_celu];
 populacja= sortrows(populacja,N+1,{'descend'});
 
 %for i=1:liczba_iteracji
-while var(populacja(:,N+1))>2
+while var(populacja(:,N+1))>20
     reprodukcja=[];
     praw_wyb_osobnika=(populacja(:,N+1)-min(populacja(:,N+1))+1);
     
@@ -82,6 +82,10 @@ while var(populacja(:,N+1))>2
     srednie=[srednie mean(populacja(:,N+1))];
     mini=[mini min(populacja(:,N+1))];
     odchylenie=[odchylenie var(populacja(:,N+1))];
+    
+    i
+    populacja(1,N+1)
+    srednie(end)
 end
 plot(maxi)
 populacja(1,:)
