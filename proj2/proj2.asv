@@ -1,16 +1,11 @@
 clear;
-% numerAlbumu=303763; %% Wpisz swój numer albumu
-% rng(numerAlbumu);
+numerAlbumu=303763; %% Wpisz swój numer albumu
+rng(numerAlbumu);
 N=32;
-% items(:,1)=round(0.1+0.9*rand(N,1),1);
-% items(:,2)=round(1+99*rand(N,1));
-load('items.mat')
+items(:,1)=round(0.1+0.9*rand(N,1),1);
+items(:,2)=round(1+99*rand(N,1));
 W=0.3*sum(items(:,1));
-    maxi=[];
-    srednie=[];
-    mini=[];
-    odchylenie=[];
-    
+
 %parametry algorytmu
 rozmiar_populacji=100;
 rozmiar_elity=3;
@@ -77,10 +72,10 @@ for i=1:liczba_iteracji
     populacja=[populacja(1:rozmiar_elity,:);reprodukcja];
     populacja= sortrows(populacja,N+1,{'descend'});
     
-    maxi=[maxi populacja(1,N+1)];
-    srednie=[srednie max(populacja(:,N+1))];
-    mini=[mini min(populacja(:,N+1))];
-    odchylenie=[odchylenie var(populacja(:,N+1))];
+    max=[max polulacja(1,N)];
+    srednie=[srednie max(polulacja(:,N))];
+    min=[min min(polulacja(:,N))];
+    odchylenie=[odchylenie var(polulacja(:,N))];
 end
 
 populacja(1,:)
