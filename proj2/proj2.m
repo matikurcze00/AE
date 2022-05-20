@@ -12,25 +12,26 @@ W=0.3*sum(items(:,1));
     odchylenie=[];
     
 %parametry algorytmu
-rozmiar_populacji=100;
+rozmiar_populacji=300;
 rozmiar_elity=3;
 liczba_iteracji=200;
-praw_mutacji=0.05;
-liczba_pot_krzyz=20;
-liczba_pot_mut=90;
+praw_mutacji=0.03;
+liczba_pot_krzyz=50;
+liczba_pot_mut=250;
 
 %inicjalizacja populacji
 populacja = randi([0 1], rozmiar_populacji,N);
 
 wartosc_f_celu=zeros(rozmiar_populacji,1);
 for i=1:rozmiar_populacji
-    wartosc_f_celu(i)=fun(populacja(i,:),items,W);
+    wartosc_f_celu(i)=fun(populacja(i,:));
 end
 
 populacja=[populacja, wartosc_f_celu];
 populacja= sortrows(populacja,N+1,{'descend'});
 
-for i=1:liczba_iteracji
+% for i=1:liczba_iteracji
+while var(populacja(:,N+1))>0.1
     reprodukcja=[];
     praw_wyb_osobnika=(populacja(:,N+1)-min(populacja(:,N+1))+1);
     
@@ -71,14 +72,14 @@ for i=1:liczba_iteracji
     wartosc_f_celu_rep=zeros(rozmiar_populacji-rozmiar_elity,1);
     
     for j=1:(rozmiar_populacji-rozmiar_elity)
-        wartosc_f_celu_rep(j)=fun(reprodukcja(j,1:N),items,W);
+        wartosc_f_celu_rep(j)=fun(reprodukcja(j,1:N));
     end
     reprodukcja(:,N+1)=[wartosc_f_celu_rep];
     populacja=[populacja(1:rozmiar_elity,:);reprodukcja];
     populacja= sortrows(populacja,N+1,{'descend'});
     
     maxi=[maxi populacja(1,N+1)];
-    srednie=[srednie max(populacja(:,N+1))];
+    srednie=[srednie mean(populacja(:,N+1))];
     mini=[mini min(populacja(:,N+1))];
     odchylenie=[odchylenie var(populacja(:,N+1))];
 end

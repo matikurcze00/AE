@@ -1,4 +1,6 @@
-function [wartosc] = fun(x,items,W)
+function [wartosc] = fun(x)
+    load('items.mat')
+    W=0.3*sum(items(:,1));
     waga=0;
     wartosc=0;
     for i=1:length(x)
@@ -8,5 +10,7 @@ function [wartosc] = fun(x,items,W)
     if waga>W
         wartosc=wartosc/2+(W-waga)*100;
     end
+    %wykomentować jeśli nie korzystamy z ga()
+    %wartosc=-wartosc;
 end
 
