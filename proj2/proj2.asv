@@ -12,12 +12,12 @@ W=0.3*sum(items(:,1));
     odchylenie=[];
     
 %parametry algorytmu
-rozmiar_populacji=2000;
-rozmiar_elity=2;
+rozmiar_populacji=50;
+rozmiar_elity=3;
 liczba_iteracji=200;
-praw_mutacji=1/32;
-liczba_pot_krzyz=100;
-liczba_pot_mut=1000;
+praw_mutacji=0.10;
+liczba_pot_krzyz=10;
+liczba_pot_mut=40;
 
 %inicjalizacja populacji
 populacja = randi([0 1], rozmiar_populacji,N);
@@ -30,8 +30,8 @@ end
 populacja=[populacja, wartosc_f_celu];
 populacja= sortrows(populacja,N+1,{'descend'});
 
-%for i=1:liczba_iteracji
-while var(populacja(:,N+1))>2
+% for i=1:liczba_iteracji
+while var(populacja(:,N+1))>0.01
     reprodukcja=[];
     praw_wyb_osobnika=(populacja(:,N+1)-min(populacja(:,N+1))+1);
     
