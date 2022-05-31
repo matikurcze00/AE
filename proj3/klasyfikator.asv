@@ -1,0 +1,18 @@
+clear all;
+load('skrypt_workspace.mat')
+
+Eta = 0.5;
+w = [1,1];
+b = 0;
+r = 0;
+for a = 1:10
+    for i = 1:20
+
+        if (sign(w * x(i,:)' - b) ~= y(i))
+            w = w + Eta*y(i)*x(i,:);
+            b = b - Eta*y(i)*r^(2);
+        end 
+    end 
+end
+
+plot(x(1:10,1),x(1:10,1)
